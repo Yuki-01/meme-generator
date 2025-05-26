@@ -25,7 +25,9 @@ def stop_playing(images: list[BuildImage], texts: list[str], args: MemeArgsModel
 
     for i, img in enumerate(images):
         img = img.convert("RGBA")
-        rotated_img = img.resize((64, 64), keep_ratio=True, inside=True).rotate(20, expand=True)
+        rotated_img = img.resize((64, 64), keep_ratio=True, inside=True).rotate(
+            20, expand=True
+        )
         x = 140 + random.randint(-10, 10) if i > 0 else 140
         y = 95 + random.randint(-10, 10) if i > 0 else 95
         frame.paste(rotated_img, (x, y), alpha=True)

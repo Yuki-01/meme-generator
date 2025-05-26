@@ -1,11 +1,13 @@
 from datetime import datetime
 from pathlib import Path
 
-from meme_generator import add_meme
-from meme_generator.utils import FrameAlignPolicy, Maker, make_gif_or_combined_gif
 from pil_utils import BuildImage
 
+from meme_generator import add_meme
+from meme_generator.utils import FrameAlignPolicy, Maker, make_gif_or_combined_gif
+
 img_dir = Path(__file__).parent / "images"
+
 
 def sora(images: list[BuildImage], texts, args):
     def maker(i: int) -> Maker:
@@ -18,7 +20,10 @@ def sora(images: list[BuildImage], texts, args):
 
         return make
 
-    return make_gif_or_combined_gif(images, maker, 41, 0.1, FrameAlignPolicy.extend_first)
+    return make_gif_or_combined_gif(
+        images, maker, 41, 0.1, FrameAlignPolicy.extend_first
+    )
+
 
 add_meme(
     "sora",
@@ -29,4 +34,3 @@ add_meme(
     date_created=datetime(2025, 5, 7),
     date_modified=datetime(2025, 5, 26),
 )
-
