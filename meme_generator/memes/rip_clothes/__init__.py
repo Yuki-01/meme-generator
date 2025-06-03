@@ -9,28 +9,30 @@ from meme_generator.utils import FrameAlignPolicy, Maker, make_gif_or_combined_g
 img_dir = Path(__file__).parent / "images"
 
 
-def sora(images: list[BuildImage], texts, args):
+def rip_clothes(images: list[BuildImage], texts, args):
     def maker(i: int) -> Maker:
         def make(imgs: list[BuildImage]) -> BuildImage:
             img = imgs[0].convert("RGBA").resize((480, 270), keep_ratio=True)
-            frame = BuildImage.open(img_dir / f"{i}.png")
-
-            frame.paste(img, (0, 0), below=True)
-            return frame
+            if i <= 15:
+                frame = BuildImage.open(img_dir / f"{i}.png")
+                frame.paste(img, (0, 0), below=True)
+                return frame
+            else:
+                return img
 
         return make
 
     return make_gif_or_combined_gif(
-        images, maker, 41, 0.1, FrameAlignPolicy.extend_first
+        images, maker, 20, 0.1, FrameAlignPolicy.extend_last
     )
 
 
 add_meme(
-    "sora",
-    sora,
+    "rip_clothes",
+    rip_clothes,
     min_images=1,
     max_images=1,
     keywords=["撕衣服"],
     date_created=datetime(2025, 5, 7),
-    date_modified=datetime(2025, 5, 26),
+    date_modified=datetime(2025, 6, 3),
 )
